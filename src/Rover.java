@@ -10,7 +10,6 @@ public class Rover {
     }
 
     public void insertCommand(String commandList) {
-        commandList.replaceAll(",", "");
         String[] commands = commandList.split("");
         for (String command : commands) {
             switch (command) {
@@ -27,8 +26,6 @@ public class Rover {
                     break;
             }
         }
-        position = position.getPosition();
-
     }
 
     public Position getPosition() {

@@ -5,7 +5,8 @@ public class Position {
     private int latitude;
     Orientation orientation;
 
-    Position() {}
+    Position() {
+    }
 
     Position(int latitude, int longitude, Orientation orientation) {
         this.longitude = latitude;
@@ -23,7 +24,6 @@ public class Position {
                 break;
             case S:
                 latitude--;
-
                 break;
             case W:
                 longitude--;
@@ -31,21 +31,26 @@ public class Position {
             default:
                 break;
         }
-        if (latitude > WORLD_LIMIT) {
-             latitude = latitude - WORLD_LIMIT;       
-        } else if (latitude < WORLD_START){
-            latitude = WORLD_LIMIT - latitude;       
+        worldDimensionsCHeck();
+    }
+
+    private void worldDimensionsCHeck() {
+        while (latitude > WORLD_LIMIT) {
+            latitude -= WORLD_LIMIT;
         }
-        if (longitude > WORLD_LIMIT) {
-            longitude = longitude - - WORLD_LIMIT; 
-        } else if (latitude < WORLD_START){
-            longitude = WORLD_LIMIT - longitude;       
+        while (latitude < WORLD_START) {
+            latitude = WORLD_LIMIT - latitude;
         }
-      
+        while (longitude > WORLD_LIMIT) {
+            longitude -= WORLD_LIMIT;
+        }
+        while (longitude < WORLD_START) {
+            longitude = WORLD_LIMIT - longitude;
+        }
     }
 
     public void rotateRight() {
-       
+
         switch (orientation) {
             case N:
                 this.orientation = Orientation.E;
@@ -82,19 +87,22 @@ public class Position {
             default:
                 break;
         }
-
     }
 
     public int getLatitude() {
         return longitude;
     }
 
-    public void setLatitude(int latitude) {
-        this.longitude = latitude;
-    }
-
     public int getLongitude() {
         return latitude;
+    }
+
+    public Orientation getOrientation() {
+        return orientation;
+    }
+
+    public void setLatitude(int latitude) {
+        this.longitude = latitude;
     }
 
     public void setLongitude(int longitude) {
@@ -104,13 +112,5 @@ public class Position {
     @Override
     public String toString() {
         return String.valueOf(longitude) + ", " + String.valueOf(latitude) + ", " + orientation.getValue();
-    }
-
-    public Position getPosition() {
-        return this;
-    }
-
-    public Orientation getOrientation() {
-        return orientation;
     }
 }
