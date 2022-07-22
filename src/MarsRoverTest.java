@@ -190,6 +190,7 @@ public class MarsRoverTest {
         assertEquals(POSITION_AFTER_COMMAND, finalPosition);
 
     }
+
     @Test
     public void rover_knows_world_dimensions_when_several_commands_are_inserted() {
         final String PROTO_LANDING_POSITION = "1, 1, N";
@@ -200,6 +201,23 @@ public class MarsRoverTest {
         Rover marsRover = new Rover(1, 1, Orientation.N);
         landingPosition = marsRover.getLangingPosition().toString();
         marsRover.insertCommand("MMMRMMMLMMMLLMMMMMRRMMMLLLMMM");
+        finalPosition = marsRover.getPosition().toString();
+
+        assertEquals(PROTO_LANDING_POSITION, landingPosition);
+        assertEquals(POSITION_AFTER_COMMAND, finalPosition);
+
+    }
+
+    @Test
+    public void wrong_command() {
+        final String PROTO_LANDING_POSITION = "1, 1, N";
+        final String POSITION_AFTER_COMMAND = "1, 1, N";
+        String landingPosition;
+        String finalPosition;
+
+        Rover marsRover = new Rover(1, 1, Orientation.N);
+        landingPosition = marsRover.getLangingPosition().toString();
+        marsRover.insertCommand("ABCDEFG");
         finalPosition = marsRover.getPosition().toString();
 
         assertEquals(PROTO_LANDING_POSITION, landingPosition);

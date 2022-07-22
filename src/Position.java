@@ -1,9 +1,11 @@
+
 public class Position {
     private static final int WORLD_LIMIT = 5;
     private static final int WORLD_START = 1;
-    private int longitude;
-    private int latitude;
-    Orientation orientation;
+    private int longitude, latitude;
+    private Orientation orientation;
+
+    int[][] tileMap = new int[WORLD_LIMIT][WORLD_LIMIT];
 
     Position() {
     }
@@ -15,6 +17,7 @@ public class Position {
     }
 
     public void moveForward() {
+
         switch (orientation) {
             case N:
                 latitude++;
@@ -31,38 +34,34 @@ public class Position {
             default:
                 break;
         }
-        worldDimensionsCHeck();
+        latitude = checkWorldDimensions(latitude);
+        longitude = checkWorldDimensions(longitude);
     }
 
-    private void worldDimensionsCHeck() {
-        while (latitude > WORLD_LIMIT) {
-            latitude -= WORLD_LIMIT;
+    private int checkWorldDimensions(int value) {
+        while (value > WORLD_LIMIT) {
+            value -= WORLD_LIMIT;
         }
-        while (latitude < WORLD_START) {
-            latitude = WORLD_LIMIT - latitude;
+        while (value < WORLD_START) {
+            value = WORLD_LIMIT - value;
         }
-        while (longitude > WORLD_LIMIT) {
-            longitude -= WORLD_LIMIT;
-        }
-        while (longitude < WORLD_START) {
-            longitude = WORLD_LIMIT - longitude;
-        }
+        return value;
     }
 
     public void rotateRight() {
 
         switch (orientation) {
             case N:
-                this.orientation = Orientation.E;
+                orientation = Orientation.E;
                 break;
             case E:
-                this.orientation = Orientation.S;
+                orientation = Orientation.S;
                 break;
             case S:
-                this.orientation = Orientation.W;
+                orientation = Orientation.W;
                 break;
             case W:
-                this.orientation = Orientation.N;
+                orientation = Orientation.N;
                 break;
             default:
                 break;

@@ -1,7 +1,9 @@
 
 public class Rover {
-    private static Position landingPosition;
-    private Position position;
+    private static final String MOVE = "M";
+    private static final String LEFT = "L";
+    private static final String RIGHT = "R";
+    private static Position landingPosition, position;
 
     Rover(int latitude, int longitude, Orientation orientation) {
         landingPosition = new Position(latitude, longitude, orientation);
@@ -13,13 +15,13 @@ public class Rover {
         String[] commands = commandList.split("");
         for (String command : commands) {
             switch (command) {
-                case "M":
+                case MOVE:
                     position.moveForward();
                     break;
-                case "L":
+                case LEFT:
                     position.rotateLeft();
                     break;
-                case "R":
+                case RIGHT:
                     position.rotateRight();
                     break;
                 default:
