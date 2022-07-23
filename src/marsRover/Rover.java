@@ -11,12 +11,7 @@ public class Rover {
     }
 
     Rover(String command) {
-        extractCoordinates(command);
-        String[] coord = extractCoordinates(command);
-        int latitude = Integer.valueOf(coord[0]);
-        int longitude = Integer.valueOf(coord[1]);
-        Orientation orientation = extractOrientation(command);
-        landRover(latitude, longitude, orientation);
+        landRover(command);
     }
 
     private void landRover(int latitude, int longitude, Orientation orientation) {
@@ -25,17 +20,15 @@ public class Rover {
         position = landingPosition;
     }
 
-    public String[] extractCoordinates(String command) {
+    private void landRover(String command) {
         String onlyNum = command.replaceAll("\\D+", "");
         String[] coord = onlyNum.split("");
-        return coord;
-    }
-
-    public Orientation extractOrientation(String command) {
+        int latitude = Integer.valueOf(coord[0]);
+        int longitude = Integer.valueOf(coord[1]);
         command = command.replaceAll("\\W", "");
         command = command.replaceAll("\\d", "");
         Orientation orientation = Orientation.valueOf(command);
-        return orientation;
+        landRover(latitude, longitude, orientation);
     }
 
     public void insertActions(String commandList) {

@@ -20,14 +20,22 @@ public class Position {
         this.orientation = orientation;
     }
 
-    private int checkWorldDimensions(int value) {
-        while (value > WORLD_LIMIT) {
-            value -= WORLD_LIMIT;
+    private void checkWorldDimensions(int latitude, int longitude) {
+        while (latitude > WORLD_LIMIT) {
+            latitude -= WORLD_LIMIT;
         }
-        while (value < WORLD_START) {
-            value = WORLD_LIMIT - value;
+        while (latitude < WORLD_START) {
+            latitude = WORLD_LIMIT - latitude;
         }
-        return value;
+        while (longitude > WORLD_LIMIT) {
+            longitude -= WORLD_LIMIT;
+        }
+        while (longitude < WORLD_START) {
+            longitude = WORLD_LIMIT - longitude;
+        }
+
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public void move(String command) {
@@ -64,8 +72,8 @@ public class Position {
             else if (command.equals(RIGHT))
                 orientation = Orientation.N;
         }
-        latitude = checkWorldDimensions(latitude);
-        longitude = checkWorldDimensions(longitude);
+
+        checkWorldDimensions(latitude, longitude);
     }
 
     public int getLatitude() {
