@@ -3,9 +3,10 @@ package marsRover;
 import java.util.Arrays;
 
 public class Rover {
-
+    
     private static Position landingPosition, position;
-
+    Movement movement;
+    
     Rover(int latitude, int longitude, Orientation orientation) {
         landRover(latitude, longitude, orientation);
     }
@@ -33,7 +34,7 @@ public class Rover {
 
     public void insertActions(String commandList) {
         String[] commands = commandList.split("");
-        Arrays.stream(commands).forEach(command -> position.move(command));
+        Arrays.stream(commands).forEach(command -> movement = new Movement(command, position));
     }
 
     public Position getPosition() {
