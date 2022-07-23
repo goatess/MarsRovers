@@ -1,3 +1,4 @@
+package marsRover;
 public enum Orientation {
 
     N("north", "N"),
